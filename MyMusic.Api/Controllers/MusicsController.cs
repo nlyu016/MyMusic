@@ -7,9 +7,11 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using MyMusic.Api.Resources;
 using MyMusic.Api.Validators;
+using Microsoft.AspNetCore.Authorization;
 
 namespace MyMusic.Api.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class MusicsController : ControllerBase

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MyMusic.Api.Resources;
 using MyMusic.Api.Validators;
@@ -9,6 +10,7 @@ using MyMusic.Core.Services;
 
 namespace MyMusic.Api.Controllers
 {
+
     [Route("api/[controller]")]
     [ApiController]
     public class ArtistsController : ControllerBase
@@ -22,6 +24,7 @@ namespace MyMusic.Api.Controllers
             this._artistService = artistService;
         }
 
+        [Authorize(Roles = "Role1")]
         [HttpGet("")]
         public async Task<ActionResult<IEnumerable<ArtistResource>>> GetAllArtists()
         {
@@ -31,6 +34,7 @@ namespace MyMusic.Api.Controllers
             return Ok(artistResources);
         }
 
+        [Authorize("OnlyEmail1")]
         [HttpGet("{id}")]
         public async Task<ActionResult<ArtistResource>> GetArtistById(int id)
         {
